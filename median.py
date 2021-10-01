@@ -1,31 +1,31 @@
-#median
 import numpy as np
-from statistics import median_grouped
-import grouped
+from misc import grouping
 #calcukate CF
-def CF(freq):
+def CF(freq):    
     cf = [0]
     for a in freq:
         cf.append(a+cf[-1])
     cf.pop(0)
     return cf
-#ungrouped
-
-def median_freq(X,freqs,grouped=False):
-    temp = []
+def median(X,freqency=[]):
+    #if frequency is not included frequency for each ele will be calculated
+    temp =[]
+    if freqency==[]:
+        freqs = [1 for ele in X]
+    else:
+        freqs = freqency
+    print(freqs)
     itr = 0
     for freq in freqs:
         temp+=([X[itr] for i in range(freq)])
         itr+=1
     cf= CF(freqs)
     data = np.array(temp)
-    median = median_grouped(data)
+    median = np.median(data)
+    return data,median
+def grp_median(low,up,h,freak,inclusive=False):
 
-    return(median)
-
-def grp_median(low,up,h,freak):
-
-    t = grouped.grouping(low, up,h)
+    t = grouping(low, up,h,inc = inclusive)
 
     median_term = 0
 
@@ -58,4 +58,7 @@ def grp_median(low,up,h,freak):
 
     MEDIAN = t[0][median_term] + ((N - cf_of_frequency[(median_term)-1])/frequency[i])*height
 
-    print("hola", MEDIAN)
+    print(MEDIAN)
+X = np.array([2,4,6,7])
+freqs = np.array([5,20,35,7,3])
+grp_median(0,100,20,freqs)
