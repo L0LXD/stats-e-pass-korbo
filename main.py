@@ -10,6 +10,7 @@ class data:
             if freq ==[]:
                 print('input frequencies or it wouldnt work')
     
+    
     def mean_cal():
         pass
         
